@@ -15,7 +15,7 @@ The build system tries to compile our already-compiled files.
 cd ~/frappe-bench
 
 # Step 1: Get the app with --skip-assets
-bench get-app https://github.com/africanwebguy/apexaiassistant.git --skip-assets
+bench get-app https://github.com/Apexlogic-Technology/apexaiassistant.git --skip-assets
 
 # Step 2: Install on your site  
 bench --site test.apexlogicsoftware.com install-app apexaiassistant
@@ -34,7 +34,7 @@ bench restart
 ```bash
 # Step 1: Clone manually
 cd ~/frappe-bench/apps
-git clone https://github.com/africanwebguy/apexaiassistant.git --depth 1
+git clone https://github.com/Apexlogic-Technology/apexaiassistant.git --depth 1
 
 # Step 2: Add to apps.txt
 cd ~/frappe-bench

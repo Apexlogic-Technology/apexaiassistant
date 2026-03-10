@@ -18,7 +18,7 @@ ApexAiAssistant is a role-aware AI chatbot that integrates seamlessly with ERPNe
 cd ~/frappe-bench
 
 # Install with --skip-assets to avoid build errors
-bench get-app https://github.com/africanwebguy/apexaiassistant.git --skip-assets
+bench get-app https://github.com/Apexlogic-Technology/apexaiassistant.git --skip-assets
 
 # Copy pre-built assets
 mkdir -p ~/frappe-bench/sites/assets/apexaiassistant/css
@@ -32,31 +32,9 @@ bench --site your-site.local migrate
 bench restart
 ```
 
-### Method 2: From ZIP
+### Method 2: Manual Installation (If Method 1 fails)
 
-```bash
-# Extract to apps folder
-cd ~/frappe-bench/apps
-unzip apexaiassistant.zip
-
-# Add to apps.txt
-cd ~/frappe-bench
-echo "apexaiassistant" >> sites/apps.txt
-
-# Install Python package
-pip install -e ./apps/apexaiassistant
-
-# Copy assets
-mkdir -p ~/frappe-bench/sites/assets/apexaiassistant/css
-mkdir -p ~/frappe-bench/sites/assets/apexaiassistant/js
-cp ~/frappe-bench/apps/apexaiassistant/apexaiassistant/public/css/* ~/frappe-bench/sites/assets/apexaiassistant/css/
-cp ~/frappe-bench/apps/apexaiassistant/apexaiassistant/public/js/* ~/frappe-bench/sites/assets/apexaiassistant/js/
-
-# Install on site
-bench --site your-site.local install-app apexaiassistant
-bench --site your-site.local migrate
-bench restart
-```
+See `SKIP_ASSETS_INSTALL.md` for alternative manual installation instructions if you encounter any errors!
 
 ## Configuration
 

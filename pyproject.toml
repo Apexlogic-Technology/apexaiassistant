@@ -17,9 +17,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/africanwebguy/apexaiassistant"
-Documentation = "https://github.com/africanwebguy/apexaiassistant"
-Repository = "https://github.com/africanwebguy/apexaiassistant"
+Homepage = "https://github.com/Apexlogic-Technology/apexaiassistant"
+Documentation = "https://github.com/Apexlogic-Technology/apexaiassistant"
+Repository = "https://github.com/Apexlogic-Technology/apexaiassistant"
 
 [tool.setuptools]
 packages = ["apexaiassistant"]
