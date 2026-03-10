@@ -45,5 +45,6 @@
             "type": "DocType"
         }
     ],
-    "title": "Apex AI"
+    "title": "Apex AI",
+    "onboards": []
 }
