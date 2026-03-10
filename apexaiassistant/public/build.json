@@ -1,8 +1,0 @@
-{
-    "css/apexaiassistant.css": [
-        "public/src/css/apexaiassistant.css"
-    ],
-    "js/apexaiassistant.bundle.js": [
-        "public/src/js/apexaiassistant.bundle.js"
-    ]
-}
