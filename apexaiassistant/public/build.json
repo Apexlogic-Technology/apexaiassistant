@@ -3,6 +3,6 @@
         "public/src/css/apexaiassistant.css"
     ],
     "js/apexaiassistant.bundle.js": [
-        "public/src/js/apexaiassistant.js"
+        "public/src/js/apexaiassistant.bundle.js"
     ]
 }
