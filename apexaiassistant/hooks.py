@@ -46,6 +46,7 @@ app_include_js = "/assets/apexaiassistant/js/apexaiassistant.bundle.js"
 
 # before_install = "apexaiassistant.install.before_install"
 after_install = "apexaiassistant.install.after_install"
+after_migrate = "apexaiassistant.install.after_migrate"
 
 # Uninstallation
 # ------------

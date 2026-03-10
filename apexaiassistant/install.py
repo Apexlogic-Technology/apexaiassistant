@@ -4,7 +4,6 @@
 import os
 import shutil
 import frappe
-from apexaiassistant.apexaiassistant.core.action_registry import ActionRegistry
 
 def after_install():
 	"""
@@ -16,9 +15,6 @@ def after_install():
 
 		# Create default settings only if it doesn't exist
 		create_default_settings()
-		
-		# Register default actions
-		ActionRegistry.register_default_actions()
 		
 		frappe.db.commit()
 		
@@ -35,6 +31,18 @@ def after_install():
 	except Exception as e:
 		print(f"Installation completed with warning: {str(e)}")
 		print("You can configure ApexAiAssistant Settings manually.")
+
+def after_migrate():
+	"""
+	Run after bench migrate - registers default actions once all DocTypes are synced.
+	"""
+	try:
+		from apexaiassistant.apexaiassistant.core.action_registry import ActionRegistry
+		if frappe.db.table_exists("ApexAiAssistant Action Registry"):
+			ActionRegistry.register_default_actions()
+			frappe.db.commit()
+	except Exception as e:
+		print(f"Could not register default actions: {str(e)}")
 
 def install_assets():
 	"""
