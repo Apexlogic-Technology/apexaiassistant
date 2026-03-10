@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-	name="erpassist",
+	name="apexaiassistant",
 	version="0.0.1",
-	description="AI-powered assistant for ERPNext",
-	author="Your Company",
-	author_email="support@yourcompany.com",
+	description="Apex Erpnext Ai Assistant",
+	author="Apexlogic Technology",
+	author_email="info@apexlogicsoftware.com",
 	packages=find_packages(),
 	zip_safe=False,
 	include_package_data=True,

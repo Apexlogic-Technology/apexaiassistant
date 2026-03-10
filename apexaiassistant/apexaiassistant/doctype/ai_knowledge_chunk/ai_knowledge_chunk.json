@@ -1,0 +1,58 @@
+{
+    "actions": [],
+    "creation": "2024-03-09 12:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "parent_document",
+        "chunk_index",
+        "text_content",
+        "embedding_vector"
+    ],
+    "fields": [
+        {
+            "fieldname": "parent_document",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Parent Knowledge Document",
+            "options": "AI Knowledge Base",
+            "reqd": 1
+        },
+        {
+            "fieldname": "chunk_index",
+            "fieldtype": "Int",
+            "label": "Chunk Index",
+            "reqd": 1
+        },
+        {
+            "fieldname": "text_content",
+            "fieldtype": "Text Editor",
+            "label": "Text Content"
+        },
+        {
+            "description": "JSON string of embedding vector (Hidden intentionally from standard view via custom script/css normally)",
+            "fieldname": "embedding_vector",
+            "fieldtype": "Code",
+            "label": "Embedding Vector"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2024-03-09 12:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "apexaiassistant",
+    "name": "AI Knowledge Chunk",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "read": 1,
+            "role": "System Manager",
+            "write": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "track_changes": 1
+}

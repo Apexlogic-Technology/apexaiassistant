@@ -1,4 +1,4 @@
-ERPAssist Installation Instructions
+ApexAiAssistant Installation Instructions
 ====================================
 
 QUICK INSTALL (3 Commands):
@@ -6,16 +6,16 @@ QUICK INSTALL (3 Commands):
 
 1. Extract this ZIP file to your bench apps directory:
    
-   unzip erpassist.zip -d ~/frappe-bench/apps/
+   unzip apexaiassistant.zip -d ~/frappe-bench/apps/
 
 2. Get the app (this adds it to apps.txt):
    
    cd ~/frappe-bench
-   bench get-app ./apps/erpassist
+   bench get-app ./apps/apexaiassistant
 
 3. Install on your site:
    
-   bench --site your-site.local install-app erpassist
+   bench --site your-site.local install-app apexaiassistant
    bench --site your-site.local migrate
    bench restart
 
@@ -25,20 +25,20 @@ ALTERNATIVE METHOD (If bench get-app doesn't work):
 
 1. Extract ZIP to apps folder:
    
-   unzip erpassist.zip -d ~/frappe-bench/apps/
+   unzip apexaiassistant.zip -d ~/frappe-bench/apps/
 
 2. Manually add to apps.txt:
    
    cd ~/frappe-bench
-   echo "erpassist" >> sites/apps.txt
+   echo "apexaiassistant" >> sites/apps.txt
 
 3. Install dependencies:
    
-   pip install -e ./apps/erpassist
+   pip install -e ./apps/apexaiassistant
 
 4. Install on site:
    
-   bench --site your-site.local install-app erpassist
+   bench --site your-site.local install-app apexaiassistant
    bench --site your-site.local migrate
    bench restart
 
@@ -49,7 +49,7 @@ CONFIGURE:
 After installation:
 
 1. Login to your ERPNext site
-2. Search for "ERPAssist Settings" 
+2. Search for "ApexAiAssistant Settings" 
 3. Enter your OpenAI API Key
 4. Save
 5. Refresh browser (Ctrl+Shift+R)
@@ -61,14 +61,14 @@ TROUBLESHOOTING:
 ----------------
 
 If you get "App not in apps.txt":
-  echo "erpassist" >> ~/frappe-bench/sites/apps.txt
+  echo "apexaiassistant" >> ~/frappe-bench/sites/apps.txt
 
 If you get "Module not found":
-  cd ~/frappe-bench/apps/erpassist
+  cd ~/frappe-bench/apps/apexaiassistant
   pip install -e .
 
 If UI doesn't appear:
-  bench build --app erpassist
+  bench build --app apexaiassistant
   bench clear-cache
   bench restart
 

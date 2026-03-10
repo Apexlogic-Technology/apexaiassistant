@@ -4,15 +4,15 @@ include *.json
 include *.md
 include *.py
 include *.txt
-recursive-include erpassist *.css
-recursive-include erpassist *.csv
-recursive-include erpassist *.html
-recursive-include erpassist *.ico
-recursive-include erpassist *.js
-recursive-include erpassist *.json
-recursive-include erpassist *.md
-recursive-include erpassist *.png
-recursive-include erpassist *.py
-recursive-include erpassist *.svg
-recursive-include erpassist *.txt
-recursive-exclude erpassist *.pyc
+recursive-include apexaiassistant *.css
+recursive-include apexaiassistant *.csv
+recursive-include apexaiassistant *.html
+recursive-include apexaiassistant *.ico
+recursive-include apexaiassistant *.js
+recursive-include apexaiassistant *.json
+recursive-include apexaiassistant *.md
+recursive-include apexaiassistant *.png
+recursive-include apexaiassistant *.py
+recursive-include apexaiassistant *.svg
+recursive-include apexaiassistant *.txt
+recursive-exclude apexaiassistant *.pyc

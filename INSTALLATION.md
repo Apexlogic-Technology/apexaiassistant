@@ -1,4 +1,4 @@
-# ERPAssist Installation Guide
+# ApexAiAssistant Installation Guide
 
 ## Prerequisites
 
@@ -16,11 +16,11 @@ Navigate to your Frappe bench directory and install the app:
 # Navigate to your bench directory
 cd ~/frappe-bench
 
-# Get the app from the directory containing erpassist
-bench get-app /path/to/erpassist
+# Get the app from the directory containing apexaiassistant
+bench get-app /path/to/apexaiassistant
 
 # Install the app on your site
-bench --site your-site.local install-app erpassist
+bench --site your-site.local install-app apexaiassistant
 ```
 
 ### 2. Configure OpenAI API Key
@@ -28,7 +28,7 @@ bench --site your-site.local install-app erpassist
 After installation:
 
 1. Login to your ERPNext site
-2. Go to **ERPAssist Settings** (Search in awesome bar)
+2. Go to **ApexAiAssistant Settings** (Search in awesome bar)
 3. Enter your OpenAI API Key
 4. Select your preferred AI Model (default: gpt-4o)
 5. Configure other settings as needed
@@ -38,13 +38,13 @@ After installation:
 
 The default actions are configured with common role permissions. You can customize these:
 
-1. Go to **ERPAssist Action Registry**
+1. Go to **ApexAiAssistant Action Registry**
 2. View or edit existing actions
 3. Add/remove roles as needed for each action
 
 ### 4. Test the Installation
 
-1. Click the **ERPAssist** button in the navbar (message circle icon)
+1. Click the **ApexAiAssistant** button in the navbar (message circle icon)
 2. Try asking questions like:
    - "Show me recent sales orders"
    - "What's our current stock of item ABC?"
@@ -59,18 +59,18 @@ The default actions are configured with common role permissions. You can customi
 
 ### Actions not working
 - Verify OpenAI API key is correctly configured
-- Check ERPAssist Audit Log for error details
+- Check ApexAiAssistant Audit Log for error details
 - Verify user has required roles for the action
 
 ### Permission errors
-- Check ERPAssist Action Registry for role requirements
+- Check ApexAiAssistant Action Registry for role requirements
 - Ensure user has necessary ERPNext permissions for underlying doctypes
 
 ## Configuration
 
 ### Enabled Modules
 
-In ERPAssist Settings, you can enable/disable modules:
+In ApexAiAssistant Settings, you can enable/disable modules:
 - CRM
 - Selling
 - Buying
@@ -87,9 +87,9 @@ In ERPAssist Settings, you can enable/disable modules:
 
 ### Action Registry
 
-You can add custom actions in ERPAssist Action Registry:
+You can add custom actions in ApexAiAssistant Action Registry:
 
-1. Create new ERPAssist Action Registry document
+1. Create new ApexAiAssistant Action Registry document
 2. Define:
    - Action Name
    - Category (QUERY, DRAFT, APPROVE, POST, EXECUTE_PAYROLL)
@@ -102,7 +102,7 @@ You can add custom actions in ERPAssist Action Registry:
 
 ### Creating Custom Handlers
 
-Create handler functions in `erpassist/erpassist/handlers/`:
+Create handler functions in `apexaiassistant/apexaiassistant/handlers/`:
 
 ```python
 def my_custom_action(parameters, user):
@@ -126,22 +126,22 @@ def my_custom_action(parameters, user):
         }
 ```
 
-Then register it in ERPAssist Action Registry with handler function path:
-`erpassist.erpassist.handlers.module_name.my_custom_action`
+Then register it in ApexAiAssistant Action Registry with handler function path:
+`apexaiassistant.apexaiassistant.handlers.module_name.my_custom_action`
 
 ## Support
 
 For issues and questions:
-- Check ERPAssist Audit Log for detailed error information
+- Check ApexAiAssistant Audit Log for detailed error information
 - Review browser console for frontend errors
 - Check ERPNext error logs: `bench --site your-site.local logs`
 
 ## Uninstallation
 
-To uninstall ERPAssist:
+To uninstall ApexAiAssistant:
 
 ```bash
-bench --site your-site.local uninstall-app erpassist
+bench --site your-site.local uninstall-app apexaiassistant
 ```
 
-Note: This will remove all ERPAssist data including chat sessions and audit logs.
+Note: This will remove all ApexAiAssistant data including chat sessions and audit logs.

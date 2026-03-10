@@ -1,0 +1,573 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("ApexAiAssistant Chat") }}{% endblock %}
+
+{% block head_include %}
+<style>
+.apexaiassistant-chat-page {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+	height: calc(100vh - 100px);
+	display: flex;
+	flex-direction: column;
+}
+
+.chat-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+	overflow: hidden;
+}
+
+.chat-header {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.chat-header h2 {
+	margin: 0;
+	font-size: 24px;
+}
+
+.chat-header .status {
+	font-size: 14px;
+	opacity: 0.9;
+}
+
+.chat-messages {
+	flex: 1;
+	overflow-y: auto;
+	padding: 20px;
+	background: #f5f7fa;
+}
+
+.chat-message {
+	margin-bottom: 16px;
+	display: flex;
+	gap: 12px;
+}
+
+.chat-message.user-message {
+	flex-direction: row-reverse;
+}
+
+.message-avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	flex-shrink: 0;
+}
+
+.user-message .message-avatar {
+	background: #667eea;
+	color: white;
+}
+
+.assistant-message .message-avatar {
+	background: #48bb78;
+	color: white;
+}
+
+.message-content {
+	max-width: 70%;
+	padding: 12px 16px;
+	border-radius: 12px;
+	word-wrap: break-word;
+}
+
+.user-message .message-content {
+	background: #667eea;
+	color: white;
+	border-bottom-right-radius: 4px;
+}
+
+.assistant-message .message-content {
+	background: white;
+	border: 1px solid #e2e8f0;
+	border-bottom-left-radius: 4px;
+}
+
+.message-time {
+	font-size: 11px;
+	opacity: 0.7;
+	margin-top: 4px;
+}
+
+.typing-indicator {
+	display: flex;
+	gap: 4px;
+	padding: 12px 16px;
+}
+
+.typing-indicator .dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #cbd5e0;
+	animation: typing 1.4s infinite;
+}
+
+.typing-indicator .dot:nth-child(2) {
+	animation-delay: 0.2s;
+}
+
+.typing-indicator .dot:nth-child(3) {
+	animation-delay: 0.4s;
+}
+
+@keyframes typing {
+	0%, 60%, 100% { transform: translateY(0); }
+	30% { transform: translateY(-10px); }
+}
+
+.chat-input-area {
+	padding: 20px;
+	background: white;
+	border-top: 1px solid #e2e8f0;
+}
+
+.input-wrapper {
+	display: flex;
+	gap: 12px;
+	align-items: flex-end;
+}
+
+.chat-input {
+	flex: 1;
+	padding: 12px 16px;
+	border: 2px solid #e2e8f0;
+	border-radius: 24px;
+	font-size: 15px;
+	resize: none;
+	max-height: 120px;
+	font-family: inherit;
+}
+
+.chat-input:focus {
+	outline: none;
+	border-color: #667eea;
+}
+
+.send-button {
+	padding: 12px 32px;
+	background: #667eea;
+	color: white;
+	border: none;
+	border-radius: 24px;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.send-button:hover {
+	background: #5568d3;
+	transform: translateY(-1px);
+}
+
+.send-button:active {
+	transform: translateY(0);
+}
+
+.send-button:disabled {
+	background: #cbd5e0;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.config-warning {
+	background: #fff3cd;
+	border: 1px solid #ffc107;
+	color: #856404;
+	padding: 16px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+}
+
+.config-warning a {
+	color: #856404;
+	text-decoration: underline;
+	font-weight: 600;
+}
+
+.quick-actions {
+	padding: 12px 20px;
+	background: #f8f9fa;
+	border-bottom: 1px solid #e2e8f0;
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.quick-action-btn {
+	padding: 6px 12px;
+	background: white;
+	border: 1px solid #e2e8f0;
+	border-radius: 16px;
+	font-size: 13px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.quick-action-btn:hover {
+	background: #667eea;
+	color: white;
+	border-color: #667eea;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 12px;
+	font-size: 14px;
+}
+
+table th {
+	background: #f7fafc;
+	padding: 8px;
+	text-align: left;
+	border-bottom: 2px solid #e2e8f0;
+	font-weight: 600;
+}
+
+table td {
+	padding: 8px;
+	border-bottom: 1px solid #e2e8f0;
+}
+
+.confirmation-box {
+	background: #fff3cd;
+	border: 1px solid #ffc107;
+	padding: 16px;
+	border-radius: 8px;
+	margin-top: 12px;
+}
+
+.confirmation-box .btn-group {
+	margin-top: 12px;
+	display: flex;
+	gap: 8px;
+}
+
+.confirmation-box button {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.confirmation-box .confirm-btn {
+	background: #48bb78;
+	color: white;
+}
+
+.confirmation-box .cancel-btn {
+	background: #e2e8f0;
+	color: #4a5568;
+}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="apexaiassistant-chat-page">
+	{% if not api_key_configured %}
+	<div class="config-warning">
+		<strong>⚠️ Configuration Required</strong><br>
+		Please configure your OpenAI API key in 
+		<a href="/app/apexaiassistant-settings">ApexAiAssistant Settings</a> to start using the chat.
+	</div>
+	{% endif %}
+	
+	<div class="chat-container">
+		<div class="chat-header">
+			<div>
+				<h2>🤖 ApexAiAssistant AI</h2>
+				<div class="status">Your intelligent ERP assistant</div>
+			</div>
+			<div style="text-align: right;">
+				<div style="font-size: 13px;">Model: {{ ai_model }}</div>
+				<div style="font-size: 11px; opacity: 0.8;" id="session-id"></div>
+			</div>
+		</div>
+		
+		<div class="quick-actions">
+			<button class="quick-action-btn" data-msg="Show me sales orders from last month">📊 Recent Sales</button>
+			<button class="quick-action-btn" data-msg="What's our current stock levels?">📦 Stock Levels</button>
+			<button class="quick-action-btn" data-msg="List pending leave applications">🏖️ Leave Requests</button>
+			<button class="quick-action-btn" data-msg="Show me top 10 customers">👥 Top Customers</button>
+			<button class="quick-action-btn" data-msg="What's our lead conversion rate?">📈 Conversion Rate</button>
+		</div>
+		
+		<div class="chat-messages" id="chat-messages">
+			<div class="chat-message assistant-message">
+				<div class="message-avatar">AI</div>
+				<div>
+					<div class="message-content">
+						👋 Hello! I'm ApexAiAssistant, your AI-powered ERP assistant. I can help you with:
+						<br><br>
+						• Query data across CRM, Sales, Buying, Stock, Accounting, HR, and more<br>
+						• Generate reports and analytics<br>
+						• Create drafts for orders, invoices, and documents<br>
+						• Execute approved workflows<br>
+						<br>
+						What would you like to know?
+					</div>
+					<div class="message-time">Just now</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="chat-input-area">
+			<div class="input-wrapper">
+				<textarea 
+					id="chat-input" 
+					class="chat-input" 
+					placeholder="Type your message... (Press Enter to send, Shift+Enter for new line)"
+					rows="1"
+					{% if not api_key_configured %}disabled{% endif %}
+				></textarea>
+				<button 
+					id="send-button" 
+					class="send-button"
+					{% if not api_key_configured %}disabled{% endif %}
+				>
+					Send
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function() {
+	let session_id = null;
+	let is_sending = false;
+	
+	const $messages = $('#chat-messages');
+	const $input = $('#chat-input');
+	const $sendBtn = $('#send-button');
+	
+	// Auto-resize textarea
+	$input.on('input', function() {
+		this.style.height = 'auto';
+		this.style.height = (this.scrollHeight) + 'px';
+	});
+	
+	// Send on Enter (Shift+Enter for new line)
+	$input.on('keypress', function(e) {
+		if (e.which === 13 && !e.shiftKey) {
+			e.preventDefault();
+			sendMessage();
+		}
+	});
+	
+	// Send button click
+	$sendBtn.on('click', sendMessage);
+	
+	// Quick action buttons
+	$('.quick-action-btn').on('click', function() {
+		const msg = $(this).data('msg');
+		$input.val(msg);
+		sendMessage();
+	});
+	
+	function sendMessage() {
+		if (is_sending) return;
+		
+		const message = $input.val().trim();
+		if (!message) return;
+		
+		// Clear input
+		$input.val('').css('height', 'auto');
+		
+		// Add user message
+		addMessage('user', message);
+		
+		// Show typing
+		showTyping();
+		
+		// Disable input
+		is_sending = true;
+		$input.prop('disabled', true);
+		$sendBtn.prop('disabled', true);
+		
+		// Send to server
+		frappe.call({
+			method: 'apexaiassistant.apexaiassistant.api.chat.send_message',
+			args: {
+				message: message,
+				session_id: session_id
+			},
+			callback: function(r) {
+				hideTyping();
+				is_sending = false;
+				$input.prop('disabled', false);
+				$sendBtn.prop('disabled', false);
+				$input.focus();
+				
+				if (r.message && r.message.success) {
+					session_id = r.message.session_id;
+					$('#session-id').text('Session: ' + session_id.substring(0, 8));
+					
+					const response = r.message.response;
+					
+					// Add assistant response
+					addMessage('assistant', response.message);
+					
+					// Handle special responses
+					if (response.type === 'confirmation_required') {
+						showConfirmation(response);
+					} else if (response.type === 'table' && response.data) {
+						showTable(response.data);
+					}
+				} else {
+					addMessage('assistant', '❌ Sorry, I encountered an error. Please try again.');
+				}
+			},
+			error: function() {
+				hideTyping();
+				is_sending = false;
+				$input.prop('disabled', false);
+				$sendBtn.prop('disabled', false);
+				addMessage('assistant', '❌ Sorry, I encountered an error. Please check your connection and try again.');
+			}
+		});
+	}
+	
+	function addMessage(role, content) {
+		const isUser = role === 'user';
+		const avatar = isUser ? frappe.session.user.charAt(0).toUpperCase() : 'AI';
+		const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+		
+		const html = `
+			<div class="chat-message ${role}-message">
+				<div class="message-avatar">${avatar}</div>
+				<div>
+					<div class="message-content">${frappe.utils.escape_html(content)}</div>
+					<div class="message-time">${time}</div>
+				</div>
+			</div>
+		`;
+		
+		$messages.append(html);
+		scrollToBottom();
+	}
+	
+	function showTyping() {
+		const html = `
+			<div class="chat-message assistant-message typing-indicator-msg" id="typing-indicator">
+				<div class="message-avatar">AI</div>
+				<div>
+					<div class="message-content">
+						<div class="typing-indicator">
+							<span class="dot"></span>
+							<span class="dot"></span>
+							<span class="dot"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		`;
+		$messages.append(html);
+		scrollToBottom();
+	}
+	
+	function hideTyping() {
+		$('#typing-indicator').remove();
+	}
+	
+	function showConfirmation(response) {
+		const html = `
+			<div class="confirmation-box">
+				<strong>⚠️ Confirmation Required</strong><br>
+				<strong>Action:</strong> ${response.action_details.description}<br>
+				<div class="btn-group">
+					<button class="confirm-btn" onclick="confirmAction('${response.action_name}', '${JSON.stringify(response.parameters).replace(/'/g, "\\'")}')">
+						✓ Confirm
+					</button>
+					<button class="cancel-btn" onclick="$(this).closest('.confirmation-box').remove()">
+						✗ Cancel
+					</button>
+				</div>
+			</div>
+		`;
+		$messages.append(html);
+		scrollToBottom();
+	}
+	
+	function showTable(data) {
+		// Get the first data array
+		const items = data.leads || data.sales_orders || data.purchase_orders || data.stock_balances || data.accounts || data.employees || [];
+		
+		if (items && items.length > 0) {
+			const keys = Object.keys(items[0]);
+			let html = '<table><thead><tr>';
+			
+			keys.forEach(key => {
+				html += `<th>${key}</th>`;
+			});
+			html += '</tr></thead><tbody>';
+			
+			items.slice(0, 20).forEach(item => {
+				html += '<tr>';
+				keys.forEach(key => {
+					html += `<td>${item[key] || ''}</td>`;
+				});
+				html += '</tr>';
+			});
+			
+			html += '</tbody></table>';
+			
+			if (items.length > 20) {
+				html += `<p style="margin-top: 8px; font-size: 13px; color: #718096;">Showing 20 of ${items.length} records</p>`;
+			}
+			
+			$messages.append(html);
+			scrollToBottom();
+		}
+	}
+	
+	function scrollToBottom() {
+		$messages.scrollTop($messages[0].scrollHeight);
+	}
+	
+	// Make confirmAction global
+	window.confirmAction = function(action_name, parameters) {
+		showTyping();
+		
+		frappe.call({
+			method: 'apexaiassistant.apexaiassistant.api.chat.confirm_action',
+			args: {
+				session_id: session_id,
+				action_name: action_name,
+				parameters: JSON.parse(parameters)
+			},
+			callback: function(r) {
+				hideTyping();
+				if (r.message && r.message.success) {
+					addMessage('assistant', '✅ ' + r.message.message);
+				} else {
+					addMessage('assistant', '❌ Action failed: ' + (r.message.error || 'Unknown error'));
+				}
+			}
+		});
+	};
+	
+	// Focus input on load
+	$input.focus();
+});
+</script>
+{% endblock %}

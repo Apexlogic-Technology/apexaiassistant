@@ -1,0 +1,31 @@
+{
+    "content": "",
+    "creation": "2025-01-02 10:00:00.000000",
+    "docstatus": 0,
+    "doctype": "Page",
+    "icon": "octicon octicon-comment-discussion",
+    "modified": "2025-01-02 10:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "ApexAiAssistant",
+    "name": "apexaiassistant-chat",
+    "owner": "Administrator",
+    "page_name": "apexaiassistant-chat",
+    "roles": [
+        {
+            "role": "System Manager"
+        },
+        {
+            "role": "Sales User"
+        },
+        {
+            "role": "HR User"
+        },
+        {
+            "role": "Accounts User"
+        }
+    ],
+    "script": "",
+    "standard": "Yes",
+    "style": "",
+    "title": "Apex Erpnext Ai Assistant"
+}

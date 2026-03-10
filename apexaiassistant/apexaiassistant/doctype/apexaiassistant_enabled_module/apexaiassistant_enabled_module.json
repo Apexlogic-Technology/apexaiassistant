@@ -1,0 +1,40 @@
+{
+ "actions": [],
+ "creation": "2025-01-02 10:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "module_name",
+  "enabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "module_name",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Module Name",
+   "options": "CRM\nSelling\nBuying\nStock\nAccounting\nHR\nPayroll\nProjects\nSupport\nManufacturing\nAssets\nQuality\nMaintenance",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enabled"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-01-02 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ApexAiAssistant",
+ "name": "ApexAiAssistant Enabled Module",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

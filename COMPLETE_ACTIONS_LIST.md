@@ -1,8 +1,8 @@
-# ERPAssist - Complete Actions Manifest
+# ApexAiAssistant - Complete Actions Manifest
 
 ## Total Actions: 50+ Across 12 Modules
 
-This document lists ALL actions available in ERPAssist with detailed descriptions.
+This document lists ALL actions available in ApexAiAssistant with detailed descriptions.
 
 ---
 
@@ -839,5 +839,5 @@ All actions respect ERPNext's role-based permission system:
 
 **Note**: This is the comprehensive list of built-in actions. You can easily add more actions by:
 1. Creating handler functions in the appropriate module file
-2. Registering them in ERPAssist Action Registry
+2. Registering them in ApexAiAssistant Action Registry
 3. Assigning appropriate roles and permissions

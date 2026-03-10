@@ -1,4 +1,4 @@
-# ✅ ERPAssist - WORKING Installation (Skip Assets Method)
+# ✅ ApexAiAssistant - WORKING Installation (Skip Assets Method)
 
 ## 🎯 The Solution
 
@@ -15,14 +15,14 @@ The build system tries to compile our already-compiled files.
 cd ~/frappe-bench
 
 # Step 1: Get the app with --skip-assets
-bench get-app https://github.com/africanwebguy/erpassist.git --skip-assets
+bench get-app https://github.com/africanwebguy/apexaiassistant.git --skip-assets
 
 # Step 2: Install on your site  
-bench --site test.apexlogicsoftware.com install-app erpassist
+bench --site test.apexlogicsoftware.com install-app apexaiassistant
 
 # Step 3: Build assets manually (one time)
-bench build --app erpassist || true  # Ignore build errors
-cp -r ~/frappe-bench/apps/erpassist/erpassist/public/* ~/frappe-bench/sites/assets/erpassist/
+bench build --app apexaiassistant || true  # Ignore build errors
+cp -r ~/frappe-bench/apps/apexaiassistant/apexaiassistant/public/* ~/frappe-bench/sites/assets/apexaiassistant/
 
 # Step 4: Restart
 bench --site test.apexlogicsoftware.com migrate
@@ -34,23 +34,23 @@ bench restart
 ```bash
 # Step 1: Clone manually
 cd ~/frappe-bench/apps
-git clone https://github.com/africanwebguy/erpassist.git --depth 1
+git clone https://github.com/africanwebguy/apexaiassistant.git --depth 1
 
 # Step 2: Add to apps.txt
 cd ~/frappe-bench
-echo "erpassist" >> sites/apps.txt
+echo "apexaiassistant" >> sites/apps.txt
 
 # Step 3: Install Python package
-pip install -e ./apps/erpassist
+pip install -e ./apps/apexaiassistant
 
 # Step 4: Copy assets manually
-mkdir -p ~/frappe-bench/sites/assets/erpassist/css
-mkdir -p ~/frappe-bench/sites/assets/erpassist/js
-cp ~/frappe-bench/apps/erpassist/erpassist/public/css/* ~/frappe-bench/sites/assets/erpassist/css/
-cp ~/frappe-bench/apps/erpassist/erpassist/public/js/* ~/frappe-bench/sites/assets/erpassist/js/
+mkdir -p ~/frappe-bench/sites/assets/apexaiassistant/css
+mkdir -p ~/frappe-bench/sites/assets/apexaiassistant/js
+cp ~/frappe-bench/apps/apexaiassistant/apexaiassistant/public/css/* ~/frappe-bench/sites/assets/apexaiassistant/css/
+cp ~/frappe-bench/apps/apexaiassistant/apexaiassistant/public/js/* ~/frappe-bench/sites/assets/apexaiassistant/js/
 
 # Step 5: Install on site
-bench --site test.apexlogicsoftware.com install-app erpassist
+bench --site test.apexlogicsoftware.com install-app apexaiassistant
 bench --site test.apexlogicsoftware.com migrate
 bench restart
 ```
@@ -60,7 +60,7 @@ bench restart
 ## ⚙️ Configure (30 seconds)
 
 1. **Login** to your ERPNext site
-2. **Search**: "ERPAssist Settings" (use the awesome bar, press `/`)
+2. **Search**: "ApexAiAssistant Settings" (use the awesome bar, press `/`)
 3. **Enter** your OpenAI API key
 4. **Save**
 5. **Hard refresh** browser: `Ctrl + Shift + R` (Windows/Linux) or `Cmd + Shift + R` (Mac)
@@ -77,7 +77,7 @@ bench restart
 4. Click: **Create new secret key**
 5. Copy the key (starts with `sk-proj-...` or `sk-...`)
 6. **Important**: Add billing info and credits to your OpenAI account
-7. Paste key in ERPAssist Settings
+7. Paste key in ApexAiAssistant Settings
 
 💰 **Pricing**:
 - gpt-4o: ~$0.01-0.02 per query
@@ -90,19 +90,19 @@ bench restart
 ### Check if app is installed:
 ```bash
 bench --site test.apexlogicsoftware.com list-apps
-# Should show: frappe, erpnext, hrms, erpassist
+# Should show: frappe, erpnext, hrms, apexaiassistant
 ```
 
 ### Check if assets are present:
 ```bash
-ls -la ~/frappe-bench/sites/assets/erpassist/
+ls -la ~/frappe-bench/sites/assets/apexaiassistant/
 # Should show css/ and js/ folders
 ```
 
 ### Check in browser:
 1. Open Developer Tools (F12)
 2. Go to Console tab
-3. Check for any erpassist errors
+3. Check for any apexaiassistant errors
 4. Should see chat button in navbar
 
 ---
@@ -113,7 +113,7 @@ ls -la ~/frappe-bench/sites/assets/erpassist/
 **Solution**:
 ```bash
 # Copy assets again
-cp -r ~/frappe-bench/apps/erpassist/erpassist/public/* ~/frappe-bench/sites/assets/erpassist/
+cp -r ~/frappe-bench/apps/apexaiassistant/apexaiassistant/public/* ~/frappe-bench/sites/assets/apexaiassistant/
 
 # Clear cache and restart
 bench --site test.apexlogicsoftware.com clear-cache
@@ -122,7 +122,7 @@ bench restart
 # Hard refresh browser: Ctrl+Shift+R
 ```
 
-### Issue: "ERPAssist Settings not found"
+### Issue: "ApexAiAssistant Settings not found"
 **Solution**:
 ```bash
 bench --site test.apexlogicsoftware.com migrate
@@ -141,7 +141,7 @@ bench restart
 **Solution**: Ignore them! Assets are already built.
 ```bash
 # Just copy the assets manually:
-cp -r ~/frappe-bench/apps/erpassist/erpassist/public/* ~/frappe-bench/sites/assets/erpassist/
+cp -r ~/frappe-bench/apps/apexaiassistant/apexaiassistant/public/* ~/frappe-bench/sites/assets/apexaiassistant/
 ```
 
 ---
@@ -184,7 +184,7 @@ See `COMPLETE_ACTIONS_LIST.md` for full details!
 
 1. **Be specific** in your queries
 2. **Use natural language** - talk like you would to a colleague
-3. **Check the audit log** - All actions are logged in "ERPAssist Audit Log"
+3. **Check the audit log** - All actions are logged in "ApexAiAssistant Audit Log"
 4. **Review before confirming** - Always double-check financial actions
 5. **Start with queries** - Get familiar before using action commands
 
@@ -204,16 +204,16 @@ tail -f ~/frappe-bench/logs/bench.log
 ### Debug in browser:
 1. Press F12 to open Developer Tools
 2. Go to Console tab
-3. Look for errors mentioning "erpassist"
+3. Look for errors mentioning "apexaiassistant"
 4. Check Network tab for failed API calls
 
 ### Verify file structure:
 ```bash
 # Check public files exist
-ls ~/frappe-bench/apps/erpassist/erpassist/public/
+ls ~/frappe-bench/apps/apexaiassistant/apexaiassistant/public/
 
 # Check assets copied correctly
-ls ~/frappe-bench/sites/assets/erpassist/
+ls ~/frappe-bench/sites/assets/apexaiassistant/
 ```
 
 ---

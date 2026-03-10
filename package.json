@@ -1,7 +1,7 @@
 {
-  "name": "erpassist",
+  "name": "apexaiassistant",
   "version": "0.0.1",
-  "description": "AI-powered assistant for ERPNext",
+  "description": "Apex Erpnext Ai Assistant",
   "scripts": {},
   "dependencies": {}
 }

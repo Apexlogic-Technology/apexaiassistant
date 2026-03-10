@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "erpassist"
+name = "apexaiassistant"
 version = "0.0.1"
 description = "AI-powered assistant for ERPNext"
 readme = "README.md"
@@ -17,12 +17,12 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/africanwebguy/erpassist"
-Documentation = "https://github.com/africanwebguy/erpassist"
-Repository = "https://github.com/africanwebguy/erpassist"
+Homepage = "https://github.com/africanwebguy/apexaiassistant"
+Documentation = "https://github.com/africanwebguy/apexaiassistant"
+Repository = "https://github.com/africanwebguy/apexaiassistant"
 
 [tool.setuptools]
-packages = ["erpassist"]
+packages = ["apexaiassistant"]
 
 [tool.setuptools.package-data]
-erpassist = ["**/*.json", "**/*.js", "**/*.css", "**/*.html", "**/*.py", "**/*.md", "**/*.txt"]
+apexaiassistant = ["**/*.json", "**/*.js", "**/*.css", "**/*.html", "**/*.py", "**/*.md", "**/*.txt"]
