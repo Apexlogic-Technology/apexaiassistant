@@ -94,20 +94,20 @@ after_install = "apexaiassistant.install.after_install"
 # Scheduled Tasks
 # ---------------
 
-scheduler_events = {
-	"hourly": [
-		"apexaiassistant.apexaiassistant.core.watchdog.run_watchdogs"
-	],
-	"daily": [
-		"apexaiassistant.apexaiassistant.core.email_reports.EmailReportAutomation.send_daily_reports"
-	],
-	"weekly": [
-		"apexaiassistant.apexaiassistant.core.email_reports.EmailReportAutomation.send_weekly_reports"
-	],
-	"monthly": [
-		"apexaiassistant.apexaiassistant.core.email_reports.EmailReportAutomation.send_monthly_reports"
-	]
-}
+# scheduler_events = {
+# 	"hourly": [
+# 		"apexaiassistant.apexaiassistant.core.watchdog.run_watchdogs"
+# 	],
+# 	"daily": [
+# 		"apexaiassistant.apexaiassistant.core.email_reports.EmailReportAutomation.send_daily_reports"
+# 	],
+# 	"weekly": [
+# 		"apexaiassistant.apexaiassistant.core.email_reports.EmailReportAutomation.send_weekly_reports"
+# 	],
+# 	"monthly": [
+# 		"apexaiassistant.apexaiassistant.core.email_reports.EmailReportAutomation.send_monthly_reports"
+# 	]
+# }
 
 # Testing
 # -------
