@@ -1,9 +1,8 @@
-# Copyright (c) 2025, Your Company and contributors
+# Copyright (c) 2025, Apexlogic Technology and contributors
 # For license information, please see license.txt
 
 import frappe
 import json
-import litellm
 import re
 import base64
 import os
@@ -95,6 +94,10 @@ class AIOrchestrator:
 				eval_model = "deepseek/" + eval_model
 			
 			# Call LLM via LiteLLM
+			try:
+				import litellm
+			except ImportError:
+				frappe.throw("litellm is not installed. Run: pip install litellm")
 			response = litellm.completion(
 				model=eval_model,
 				messages=messages,
