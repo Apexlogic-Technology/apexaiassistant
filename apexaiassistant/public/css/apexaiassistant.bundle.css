@@ -101,13 +101,13 @@
 	position: fixed;
 	width: 60px;
 	height: 60px;
-	background: var(--primary, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
-	color: var(--primary-color-text, white);
+	background: var(--control-bg, #f3f3f3); /* Gray background */
+	color: #000000; /* Black icon */
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	box-shadow: var(--shadow-sm, 0 4px 12px rgba(102, 126, 234, 0.4));
+	box-shadow: var(--shadow-sm, 0 4px 12px rgba(0, 0, 0, 0.1));
 	cursor: pointer;
 	z-index: 1040;
 	transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -118,7 +118,7 @@
 }
 
 .apexaiassistant-chat-bubble .icon {
-	color: white;
+	color: #000000;
 }
 
 .apexaiassistant-chat-panel .chat-messages {

@@ -1,6 +1,6 @@
 {
     "charts": [],
-    "content": "[{\"id\":\"shortcut-chat\",\"type\":\"shortcut\",\"data\":{\"label\":\"Launch AI Chat\",\"format\":\"\",\"link_to\":\"apexaiassistant-chat\",\"type\":\"Page\",\"color\":\"Blue\",\"icon\":\"message-circle\"}},{\"id\":\"shortcut-settings\",\"type\":\"shortcut\",\"data\":{\"label\":\"AI Settings\",\"format\":\"\",\"link_to\":\"ApexAiAssistant Settings\",\"type\":\"DocType\",\"color\":\"Green\",\"icon\":\"settings\"}},{\"id\":\"shortcut-audit\",\"type\":\"shortcut\",\"data\":{\"label\":\"Audit Log\",\"format\":\"\",\"link_to\":\"ApexAiAssistant Audit Log\",\"type\":\"DocType\",\"color\":\"Orange\",\"icon\":\"file-text\"}},{\"id\":\"shortcut-actions\",\"type\":\"shortcut\",\"data\":{\"label\":\"Action Registry\",\"format\":\"\",\"link_to\":\"ApexAiAssistant Action Registry\",\"type\":\"DocType\",\"color\":\"Purple\",\"icon\":\"list\"}}]",
+    "content": "[{\"id\":\"WpLpDIfjJ3\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">AI Tools</span>\"}},{\"id\":\"z9eJwD19pZ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Launch AI Chat\",\"col\":3}},{\"id\":\"P7zRcL_wA2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AI Settings\",\"col\":3}},{\"id\":\"m1nBzXY9pQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Audit Log\",\"col\":3}},{\"id\":\"L8kPqMw1cE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Action Registry\",\"col\":3}}]",
     "creation": "2025-01-03 00:00:00.000000",
     "custom_blocks": [],
     "docstatus": 0,
