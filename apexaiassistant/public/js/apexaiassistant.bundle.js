@@ -14,34 +14,48 @@ apexaiassistant.ChatPanel = class ChatPanel {
 	}
 
 	init() {
-		// Add chat button to navbar
-		this.add_chat_button();
+		// Prevent double bubbles during PJAX routing
+		if ($('#apexaiassistant-chat-bubble').length > 0) {
+			return;
+		}
 
-		// Create chat panel
-		this.create_panel();
-
-		// Bind events
-		this.bind_events();
+		// Fetch Settings
+		frappe.db.get_single_value("ApexAiAssistant Settings", "chat_bubble_position").then(position => {
+			this.position = position || "Bottom Right";
+			
+			frappe.db.get_single_value("ApexAiAssistant Settings", "chat_bubble_theme").then(theme => {
+				this.theme = theme || "Light";
+				
+				// Add chat button and panel
+				this.add_chat_button();
+				this.create_panel();
+				this.bind_events();
+			});
+		});
 	}
 
 	add_chat_button() {
-		// Create floating bubble instead of navbar icon
+		let pos_class = "apexaiassistant-pos-" + this.position.toLowerCase().replace(" ", "-");
+		let theme_class = "apexaiassistant-theme-" + this.theme.toLowerCase().replace(" (system)", "");
+		
 		const bubble_html = `
-			<div id="apexaiassistant-chat-bubble" class="apexaiassistant-chat-bubble" title="${__('Apex Erpnext Ai')}">
+			<div id="apexaiassistant-chat-bubble" class="apexaiassistant-chat-bubble ${pos_class} ${theme_class}" title="${__('Apex ERPNext AI')}">
 				<svg class="icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
 				</svg>
 			</div>
 		`;
-
 		$('body').append(bubble_html);
 	}
 
 	create_panel() {
+		let pos_class = "apexaiassistant-panel-pos-" + this.position.toLowerCase().replace(" ", "-");
+		let theme_class = "apexaiassistant-theme-" + this.theme.toLowerCase().replace(" (system)", "");
+		
 		const panel_html = `
-			<div id="apexaiassistant-chat-panel" class="apexaiassistant-chat-panel" style="display: none;">
+			<div id="apexaiassistant-chat-panel" class="apexaiassistant-chat-panel ${pos_class} ${theme_class}" style="display: none;">
 				<div class="chat-header">
-					<h5>${__('Apex Erpnext Ai')}</h5>
+					<h5>${__('Apex ERPNext AI')}</h5>
 					<div class="header-actions">
 						<button class="btn btn-sm btn-action" id="apexaiassistant-expand-btn" title="${__('Open Full Page')}">
 							<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
@@ -54,7 +68,7 @@ apexaiassistant.ChatPanel = class ChatPanel {
 				<div class="chat-messages" id="apexaiassistant-messages"></div>
 				<div class="chat-input-area">
 					<div class="input-group">
-						<button class="btn btn-default" id="apexaiassistant-attach-btn" title="${__('Attach File')}" style="border-radius: 4px 0 0 4px; border-right: none;">
+						<button class="btn btn-default" id="apexaiassistant-attach-btn" title="${__('Attach File')}" style="border-radius: var(--border-radius-md) 0 0 var(--border-radius-md); border-right: none;">
 							<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
 								<path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
 							</svg>
@@ -69,7 +83,10 @@ apexaiassistant.ChatPanel = class ChatPanel {
 			</div>
 		`;
 
-		$('body').append(panel_html);
+		if ($('#apexaiassistant-chat-panel').length === 0) {
+			$('body').append(panel_html);
+		}
+		
 		this.$panel = $('#apexaiassistant-chat-panel');
 		this.$messages = $('#apexaiassistant-messages');
 		this.$input = $('#apexaiassistant-input');
@@ -322,16 +339,15 @@ apexaiassistant.ChatPanel = class ChatPanel {
 };
 
 // Initialize on page load
+frappe.router.on('change', () => {
+    // Re-bind or initialize if not already done.
+	if (!window.apexaiassistant_chat && frappe.session && frappe.session.user !== 'Guest') {
+		window.apexaiassistant_chat = new apexaiassistant.ChatPanel();
+	}
+});
+
 $(document).ready(function () {
-	// Wait for Frappe to be ready
 	if (typeof frappe !== 'undefined' && frappe.session && frappe.session.user !== 'Guest') {
 		window.apexaiassistant_chat = new apexaiassistant.ChatPanel();
-	} else {
-		// Retry after a short delay if Frappe isn't ready yet
-		setTimeout(function () {
-			if (typeof frappe !== 'undefined' && frappe.session && frappe.session.user !== 'Guest') {
-				window.apexaiassistant_chat = new apexaiassistant.ChatPanel();
-			}
-		}, 1000);
 	}
 });

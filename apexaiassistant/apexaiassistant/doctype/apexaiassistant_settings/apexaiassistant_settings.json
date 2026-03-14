@@ -10,6 +10,8 @@
         "api_url",
         "ai_model",
         "column_break_2",
+        "chat_bubble_position",
+        "chat_bubble_theme",
         "enable_audit_log",
         "max_tokens",
         "section_break_5",
@@ -48,6 +50,20 @@
         {
             "fieldname": "column_break_2",
             "fieldtype": "Column Break"
+        },
+        {
+            "default": "Bottom Right",
+            "fieldname": "chat_bubble_position",
+            "fieldtype": "Select",
+            "label": "Chat Bubble Position",
+            "options": "Bottom Right\nBottom Left\nCenter Right\nCenter Left"
+        },
+        {
+            "default": "Light",
+            "fieldname": "chat_bubble_theme",
+            "fieldtype": "Select",
+            "label": "Chat Bubble Theme",
+            "options": "Light\nDark\nAuto (System)"
         },
         {
             "default": "1",

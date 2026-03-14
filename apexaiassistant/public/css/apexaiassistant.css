@@ -8,9 +8,9 @@
 	bottom: 20px;
 	width: 400px;
 	height: 600px;
-	background: white;
-	border-radius: 12px;
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+	background: var(--card-bg, white);
+	border-radius: var(--border-radius-md, 12px);
+	box-shadow: var(--shadow-xl, 0 8px 24px rgba(0, 0, 0, 0.15));
 	display: flex;
 	flex-direction: column;
 	z-index: 1050;
@@ -18,8 +18,8 @@
 }
 
 .apexaiassistant-chat-panel .chat-header {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
+	background: var(--primary, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+	color: var(--primary-color-text, white);
 	padding: 16px 20px;
 	display: flex;
 	justify-content: space-between;
@@ -84,20 +84,30 @@
 	opacity: 1;
 }
 
-/* Floating Bubble */
+/* Floating Bubble Positions */
+.apexaiassistant-pos-bottom-right { bottom: 24px; right: 24px; }
+.apexaiassistant-pos-bottom-left { bottom: 24px; left: 24px; }
+.apexaiassistant-pos-center-right { top: 50%; right: 24px; transform: translateY(-50%); }
+.apexaiassistant-pos-center-left { top: 50%; left: 24px; transform: translateY(-50%); }
+
+/* Panel Positions */
+.apexaiassistant-panel-pos-bottom-right { bottom: 90px; right: 24px; }
+.apexaiassistant-panel-pos-bottom-left { bottom: 90px; left: 24px; }
+.apexaiassistant-panel-pos-center-right { top: 50%; right: 90px; transform: translateY(-50%); }
+.apexaiassistant-panel-pos-center-left { top: 50%; left: 90px; transform: translateY(-50%); }
+
+/* Base Bubble Style */
 .apexaiassistant-chat-bubble {
 	position: fixed;
-	bottom: 24px;
-	right: 24px;
 	width: 60px;
 	height: 60px;
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
+	background: var(--primary, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+	color: var(--primary-color-text, white);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+	box-shadow: var(--shadow-sm, 0 4px 12px rgba(102, 126, 234, 0.4));
 	cursor: pointer;
 	z-index: 1040;
 	transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -115,7 +125,7 @@
 	flex: 1;
 	overflow-y: auto;
 	padding: 20px;
-	background: #f8f9fa;
+	background: var(--bg-light, #f8f9fa);
 }
 
 .apexaiassistant-chat-panel .chat-message {
@@ -140,14 +150,14 @@
 }
 
 .apexaiassistant-chat-panel .user-message .message-content {
-	background: #667eea;
-	color: white;
+	background: var(--primary, #667eea);
+	color: var(--primary-color-text, white);
 	border-bottom-right-radius: 4px;
 }
 
 .apexaiassistant-chat-panel .assistant-message .message-content {
-	background: white;
-	color: #333;
+	background: var(--card-bg, white);
+	color: var(--text-color, #333);
 	border-bottom-left-radius: 4px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -187,8 +197,8 @@
 
 .apexaiassistant-chat-panel .chat-input-area {
 	padding: 16px;
-	background: white;
-	border-top: 1px solid #e5e7eb;
+	background: var(--card-bg, white);
+	border-top: 1px solid var(--border-color, #e5e7eb);
 }
 
 .apexaiassistant-chat-panel .chat-input-area .input-group {
@@ -247,16 +257,17 @@
 .apexaiassistant-chat-panel table {
 	font-size: 12px;
 	margin-top: 12px;
-	background: white;
+	background: var(--card-bg, white);
+	color: var(--text-color, #333);
 }
 
 .apexaiassistant-chat-panel table th {
-	background: #f8f9fa;
+	background: var(--bg-light, #f8f9fa);
 	font-weight: 600;
 	padding: 8px;
 	text-transform: uppercase;
 	font-size: 11px;
-	color: #666;
+	color: var(--text-muted, #666);
 }
 
 .apexaiassistant-chat-panel table td {
@@ -267,9 +278,12 @@
 @media (max-width: 768px) {
 	.apexaiassistant-chat-panel {
 		width: calc(100% - 40px);
-		height: calc(100vh - 40px);
-		right: 20px;
-		bottom: 20px;
+		height: calc(100vh - 40px) !important;
+		right: 20px !important;
+		bottom: 20px !important;
+		top: auto !important;
+		left: auto !important;
+		transform: none !important;
 	}
 }
 
