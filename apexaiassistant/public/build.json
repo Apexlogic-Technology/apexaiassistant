@@ -1,6 +1,6 @@
 {
-    "css/apexaiassistant.css": [
-        "public/css/apexaiassistant.css"
+    "css/apexaiassistant.bundle.css": [
+        "public/css/apexaiassistant.bundle.css"
     ],
     "js/apexaiassistant.bundle.js": [
         "public/js/apexaiassistant.bundle.js"
