@@ -20,17 +20,31 @@ apexaiassistant.ChatPanel = class ChatPanel {
 		}
 
 		// Fetch Settings
-		frappe.db.get_single_value("ApexAiAssistant Settings", "chat_bubble_position").then(position => {
-			this.position = position || "Bottom Right";
+		frappe.db.get_doc("ApexAiAssistant Settings", "ApexAiAssistant Settings").then(doc => {
+			this.settings = doc || {};
+			this.position = this.settings.chat_bubble_position || "Bottom Right";
+			this.theme = this.settings.chat_bubble_theme || "Light";
+			this.bg_color = this.settings.chat_bubble_bg_color || "#f3f3f3";
+			this.icon_color = this.settings.chat_bubble_icon_color || "#000000";
+			this.primary_color = this.settings.chat_panel_primary_color || "#667eea";
 			
-			frappe.db.get_single_value("ApexAiAssistant Settings", "chat_bubble_theme").then(theme => {
-				this.theme = theme || "Light";
-				
-				// Add chat button and panel
-				this.add_chat_button();
-				this.create_panel();
-				this.bind_events();
-			});
+			// Add chat button and panel
+			this.add_chat_button();
+			this.create_panel();
+			this.bind_events();
+			this.apply_colors();
+		}).catch(() => {
+			// Fallback if settings fail to load
+			this.position = "Bottom Right";
+			this.theme = "Light";
+			this.bg_color = "#f3f3f3";
+			this.icon_color = "#000000";
+			this.primary_color = "#667eea";
+			
+			this.add_chat_button();
+			this.create_panel();
+			this.bind_events();
+			this.apply_colors();
 		});
 	}
 
@@ -90,6 +104,23 @@ apexaiassistant.ChatPanel = class ChatPanel {
 		this.$panel = $('#apexaiassistant-chat-panel');
 		this.$messages = $('#apexaiassistant-messages');
 		this.$input = $('#apexaiassistant-input');
+	}
+
+	apply_colors() {
+		// Apply custom hex colors dynamically to override CSS variables and defaults
+		$('#apexaiassistant-chat-bubble').css({
+			'background': this.bg_color,
+			'color': this.icon_color
+		});
+		
+		$('#apexaiassistant-chat-bubble .icon').css({
+			'color': this.icon_color
+		});
+
+		// Apply primary color as a CSS variable on the panel so children can inherit it
+		$('#apexaiassistant-chat-panel').css({
+			'--primary': this.primary_color
+		});
 	}
 
 	bind_events() {

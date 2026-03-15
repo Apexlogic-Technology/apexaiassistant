@@ -15,6 +15,9 @@ def after_install():
 
 		# Create default settings only if it doesn't exist
 		create_default_settings()
+
+		# Create impressive analytical Dashboard Charts
+		create_default_dashboard_charts()
 		
 		frappe.db.commit()
 		
@@ -38,7 +41,7 @@ def after_migrate():
 	"""
 	try:
 		from apexaiassistant.apexaiassistant.core.action_registry import ActionRegistry
-		if frappe.db.table_exists("ApexAiAssistant Action Registry"):
+		if frappe.db.has_table("tabApexAiAssistant Action Registry"):
 			ActionRegistry.register_default_actions()
 			frappe.db.commit()
 	except Exception as e:
@@ -76,31 +79,94 @@ def install_assets():
 
 def create_default_settings():
 	"""
-	Create default ApexAiAssistant Settings
+	Create or update default ApexAiAssistant Settings to enable all modules
 	"""
-	if frappe.db.exists("ApexAiAssistant Settings", "ApexAiAssistant Settings"):
-		print("ApexAiAssistant Settings already exists, skipping creation.")
-		return
-	
 	try:
-		settings = frappe.get_doc({
-			"doctype": "ApexAiAssistant Settings",
-			"ai_model": "gpt-4o",
-			"enable_audit_log": 1,
-			"max_tokens": 4000
-		})
+		if frappe.db.exists("ApexAiAssistant Settings", "ApexAiAssistant Settings"):
+			settings = frappe.get_doc("ApexAiAssistant Settings", "ApexAiAssistant Settings")
+		else:
+			settings = frappe.get_doc({
+				"doctype": "ApexAiAssistant Settings",
+				"ai_model": "gpt-4o",
+				"enable_audit_log": 1,
+				"max_tokens": 4000
+			})
 		
-		for module in ["CRM", "Selling", "Buying", "Stock", "Accounting", "HR", "Payroll", "Projects"]:
+		# Clear existing modules to avoid duplicates
+		settings.set("enabled_modules", [])
+		
+		# Define all standard modules the user wants enabled natively including HR
+		modules_to_enable = [
+			"Core", "CRM", "Selling", "Buying", "Stock", 
+			"Accounting", "HR", "Payroll", "Projects",
+			"Manufacturing", "Support", "Assets", "Quality", "Maintenance"
+		]
+		
+		for module in modules_to_enable:
 			settings.append("enabled_modules", {
 				"module_name": module,
 				"enabled": 1
 			})
 		
-		settings.insert(ignore_permissions=True, ignore_if_duplicate=True)
+		settings.save(ignore_permissions=True)
 		frappe.db.commit()
-		print("Created default ApexAiAssistant Settings")
+		print("Populated all standard enabled_modules in ApexAiAssistant Settings")
 		
 	except Exception as e:
 		print(f"Could not create default settings: {str(e)}")
 		print("Please create ApexAiAssistant Settings manually after installation.")
 
+
+def create_default_dashboard_charts():
+	"""
+	Creates the impressive predictive and descriptive Dashboard Charts
+	that hook into the custom python analytics methods.
+	"""
+	charts = [
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "AI Revenue Regression Forecast",
+			"chart_type": "Custom",
+			"source": "apexaiassistant.apexaiassistant.core.analytics.get_revenue_regression",
+			"type": "Line",
+			"color": "#667eea",
+			"dynamic_filters_json": "[]",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "ApexAiAssistant"
+		},
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "AI Employee Attrition Prediction Risk",
+			"chart_type": "Custom",
+			"source": "apexaiassistant.apexaiassistant.core.analytics.get_attrition_forecast",
+			"type": "Bar",
+			"color": "#fc4f4f",
+			"dynamic_filters_json": "[]",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "ApexAiAssistant"
+		},
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "AI Token Usage (Last 14 Days)",
+			"chart_type": "Custom",
+			"source": "apexaiassistant.apexaiassistant.core.analytics.get_ai_token_usage",
+			"type": "Line",
+			"color": "#38bdf8",
+			"dynamic_filters_json": "[]",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "ApexAiAssistant"
+		}
+	]
+
+	print("Generating Advanced Analytical Dashboard Charts...")
+	for chart_data in charts:
+		if not frappe.db.exists("Dashboard Chart", chart_data["chart_name"]):
+			try:
+				doc = frappe.get_doc(chart_data)
+				doc.insert(ignore_permissions=True)
+			except Exception as e:
+				print(f"Warning: Failed to create chart {chart_data['chart_name']}: {str(e)}")
+	frappe.db.commit()

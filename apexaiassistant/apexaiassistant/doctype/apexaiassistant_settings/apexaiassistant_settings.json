@@ -12,6 +12,9 @@
         "column_break_2",
         "chat_bubble_position",
         "chat_bubble_theme",
+        "chat_bubble_bg_color",
+        "chat_bubble_icon_color",
+        "chat_panel_primary_color",
         "enable_audit_log",
         "max_tokens",
         "section_break_5",
@@ -64,6 +67,24 @@
             "fieldtype": "Select",
             "label": "Chat Bubble Theme",
             "options": "Light\nDark\nAuto (System)"
+        },
+        {
+            "default": "#f3f3f3",
+            "fieldname": "chat_bubble_bg_color",
+            "fieldtype": "Color",
+            "label": "Chat Bubble Background Color"
+        },
+        {
+            "default": "#000000",
+            "fieldname": "chat_bubble_icon_color",
+            "fieldtype": "Color",
+            "label": "Chat Bubble Icon Color"
+        },
+        {
+            "default": "#667eea",
+            "fieldname": "chat_panel_primary_color",
+            "fieldtype": "Color",
+            "label": "Chat Panel Primary Color"
         },
         {
             "default": "1",

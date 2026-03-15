@@ -169,3 +169,6 @@ after_migrate = "apexaiassistant.install.after_migrate"
 # auth_hooks = [
 #	"apexaiassistant.auth.validate"
 # ]
+
+after_install = "apexaiassistant.install.after_install"
+after_migrate = "apexaiassistant.install.after_migrate"

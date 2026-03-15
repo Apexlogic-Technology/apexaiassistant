@@ -1,6 +1,22 @@
 {
-    "charts": [],
-    "content": "[{\"id\":\"WpLpDIfjJ3\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">AI Tools</span>\"}},{\"id\":\"z9eJwD19pZ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Launch AI Chat\",\"col\":3}},{\"id\":\"P7zRcL_wA2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AI Settings\",\"col\":3}},{\"id\":\"m1nBzXY9pQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Audit Log\",\"col\":3}},{\"id\":\"L8kPqMw1cE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Action Registry\",\"col\":3}}]",
+    "charts": [
+        {
+            "chart_name": "AI Revenue Regression Forecast",
+            "doctype": "Workspace Chart",
+            "label": "AI Revenue Regression Forecast"
+        },
+        {
+            "chart_name": "AI Employee Attrition Prediction Risk",
+            "doctype": "Workspace Chart",
+            "label": "AI Employee Attrition Prediction Risk"
+        },
+        {
+            "chart_name": "AI Token Usage (Last 14 Days)",
+            "doctype": "Workspace Chart",
+            "label": "AI Token Forecast"
+        }
+    ],
+    "content": "[{\"id\":\"WpLpDIfjJ3\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">AI Tools</span>\"}},{\"id\":\"z9eJwD19pZ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Launch AI Chat\",\"col\":3}},{\"id\":\"P7zRcL_wA2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AI Settings\",\"col\":3}},{\"id\":\"m1nBzXY9pQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Audit Log\",\"col\":3}},{\"id\":\"L8kPqMw1cE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Action Registry\",\"col\":3}},{\"id\":\"HdrAnlyTcs\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">AI Predictive Analytics Dashboard</span>\"}},{\"id\":\"CrtRvnReg0\",\"type\":\"chart\",\"data\":{\"chart_name\":\"AI Revenue Regression Forecast\",\"col\":12}},{\"id\":\"CrtEmpAtr0\",\"type\":\"chart\",\"data\":{\"chart_name\":\"AI Employee Attrition Prediction Risk\",\"col\":6}},{\"id\":\"CrtTkUsge0\",\"type\":\"chart\",\"data\":{\"chart_name\":\"AI Token Usage (Last 14 Days)\",\"col\":6}}]",
     "creation": "2025-01-03 00:00:00.000000",
     "custom_blocks": [],
     "docstatus": 0,
