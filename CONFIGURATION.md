@@ -433,7 +433,7 @@ bench --site client-site.com execute "
 import frappe
 frappe.delete_doc('Workspace', 'Apex AI', force=True, ignore_permissions=True)
 frappe.db.commit()
-"
+"the Ai
 bench --site client-site.com clear-cache
 ```
 
