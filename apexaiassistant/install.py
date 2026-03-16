@@ -5,6 +5,7 @@ import os
 import shutil
 import frappe
 
+
 def after_install():
 	"""
 	Setup ApexAiAssistant after installation
@@ -13,14 +14,14 @@ def after_install():
 		# Copy pre-built assets to sites assets directory
 		install_assets()
 
-		# Create default settings only if it doesn't exist
+		# Create default settings (enable all modules)
 		create_default_settings()
 
 		# Create impressive analytical Dashboard Charts
 		create_default_dashboard_charts()
-		
+
 		frappe.db.commit()
-		
+
 		print("=" * 60)
 		print("ApexAiAssistant installation complete!")
 		print("=" * 60)
@@ -30,10 +31,11 @@ def after_install():
 		print("3. Enter your API key and save (and refresh your browser)")
 		print("4. Click the chat icon to start!")
 		print("=" * 60)
-		
+
 	except Exception as e:
 		print(f"Installation completed with warning: {str(e)}")
 		print("You can configure ApexAiAssistant Settings manually.")
+
 
 def after_migrate():
 	"""
@@ -46,6 +48,7 @@ def after_migrate():
 			frappe.db.commit()
 	except Exception as e:
 		print(f"Could not register default actions: {str(e)}")
+
 
 def install_assets():
 	"""
@@ -63,19 +66,26 @@ def install_assets():
 		os.makedirs(css_dest, exist_ok=True)
 		os.makedirs(js_dest, exist_ok=True)
 
-		css_src = os.path.join(public_path, "css", "apexaiassistant.css")
+		# CSS: use .bundle.css (Frappe v15 convention)
+		css_src = os.path.join(public_path, "css", "apexaiassistant.bundle.css")
 		if os.path.exists(css_src):
-			shutil.copy2(css_src, os.path.join(css_dest, "apexaiassistant.css"))
-			print("Copied apexaiassistant.css to assets")
+			shutil.copy2(css_src, os.path.join(css_dest, "apexaiassistant.bundle.css"))
+			print("Copied apexaiassistant.bundle.css to assets")
+		else:
+			print("Warning: apexaiassistant.bundle.css not found - run bench build --app apexaiassistant")
 
+		# JS
 		js_src = os.path.join(public_path, "js", "apexaiassistant.bundle.js")
 		if os.path.exists(js_src):
 			shutil.copy2(js_src, os.path.join(js_dest, "apexaiassistant.bundle.js"))
 			print("Copied apexaiassistant.bundle.js to assets")
+		else:
+			print("Warning: apexaiassistant.bundle.js not found - run bench build --app apexaiassistant")
 
 	except Exception as e:
 		print(f"Warning: Could not copy assets automatically: {str(e)}")
 		print("Manually copy files from apps/apexaiassistant/apexaiassistant/public/ to sites/assets/apexaiassistant/")
+
 
 def create_default_settings():
 	"""
@@ -91,27 +101,27 @@ def create_default_settings():
 				"enable_audit_log": 1,
 				"max_tokens": 4000
 			})
-		
+
 		# Clear existing modules to avoid duplicates
 		settings.set("enabled_modules", [])
-		
-		# Define all standard modules the user wants enabled natively including HR
+
+		# All standard ERPNext modules including HR
 		modules_to_enable = [
-			"Core", "CRM", "Selling", "Buying", "Stock", 
+			"Core", "CRM", "Selling", "Buying", "Stock",
 			"Accounting", "HR", "Payroll", "Projects",
 			"Manufacturing", "Support", "Assets", "Quality", "Maintenance"
 		]
-		
+
 		for module in modules_to_enable:
 			settings.append("enabled_modules", {
 				"module_name": module,
 				"enabled": 1
 			})
-		
+
 		settings.save(ignore_permissions=True)
 		frappe.db.commit()
 		print("Populated all standard enabled_modules in ApexAiAssistant Settings")
-		
+
 	except Exception as e:
 		print(f"Could not create default settings: {str(e)}")
 		print("Please create ApexAiAssistant Settings manually after installation.")
@@ -119,7 +129,7 @@ def create_default_settings():
 
 def create_default_dashboard_charts():
 	"""
-	Creates the impressive predictive and descriptive Dashboard Charts
+	Creates predictive and descriptive Dashboard Charts
 	that hook into the custom python analytics methods.
 	"""
 	charts = [
